@@ -6,14 +6,9 @@ public class BoundableCamera : MonoBehaviour
 {
     public Camera cam;
 
-    public Collider2D TESTstartRoom;
-    /*
-
-    public Collider2D TESTroomBounds1;
-    public Collider2D TESTroomBounds2;
-    public Collider2D TESTlargeRoomBounds;
-    public Transform TESTplayerTransform;
-    */
+    public Collider2D startRoom;
+    public bool startRoomIsLarge;
+    public Transform trackedObject;
 
     private Collider2D cameraBounds;
     private Transform trackedTransform;
@@ -28,7 +23,14 @@ public class BoundableCamera : MonoBehaviour
 
     private void Start()
     {
-        SnapToSmallRoom(TESTstartRoom);
+        if(startRoomIsLarge)
+        {
+            LerpToLargeRoom(startRoom, trackedObject);
+        }
+        else
+        {
+            SnapToSmallRoom(startRoom);
+        }
     }
 
     private void SetSmallRoomBools(Collider2D boundsCollider)
@@ -71,26 +73,6 @@ public class BoundableCamera : MonoBehaviour
 
     private void Update()
     {
-        /*
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            print("Lerping camera to room location 1");
-            LerpToSmallRoom(TESTroomBounds1);
-        }
-
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            print("Lerping camera to room location 2");
-            LerpToSmallRoom(TESTroomBounds2);
-        }
-
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            print("Lerping camera to TOP room");
-            LerpToLargeRoom(TESTlargeRoomBounds, TESTplayerTransform);
-        }
-        */
-
         SetDesiredCameraPosition(); 
         
         if(isInLargeRoom)
@@ -106,7 +88,6 @@ public class BoundableCamera : MonoBehaviour
         {
             KeepCameraOnTarget();
         }
-        //print(desiredCameraPosition);
     }
 
     private void SetDesiredCameraPosition()
@@ -123,7 +104,6 @@ public class BoundableCamera : MonoBehaviour
                 desiredCameraPosition = trackedTransform.position;
             }
         }
-        
     }
 
     private void ConstrainCameraToBounds()
@@ -174,8 +154,6 @@ public class BoundableCamera : MonoBehaviour
             desiredCameraOffset.x = -halfScreenSize.x;
         }
 
-        //SuperDebugger.DrawBoxAtPoint(desiredCameraPosition, .4f, Color.white);
-
         if (useOffsetX)
         {
             desiredCameraPosition.x = corner.x + desiredCameraOffset.x;
@@ -184,8 +162,6 @@ public class BoundableCamera : MonoBehaviour
         {
             desiredCameraPosition.y = corner.y + desiredCameraOffset.y;
         }
-
-        //SuperDebugger.DrawBoxAtPoint(desiredCameraPosition, 0.43f, Color.black);
     }
 
     private void LerpToNewTrackingLocation()
