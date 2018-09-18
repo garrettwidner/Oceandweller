@@ -41,18 +41,18 @@ public class Player : MonoBehaviour
         //print("Gravity: " + gravity + " Jump Velocity: " + maxJumpVelocity);
 
         playerActions = PlayerActions.CreateWithDefaultBindings();
-        //print(timeToWallUnstick);
     }
 
     private void Update()
     {
         //Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         Vector2 input = new Vector2(playerActions.Move.X, playerActions.Move.Y);
-        //print(input.ToString("f4"));
+        input = input.ClosestCardinalDirection();
 
         int wallDirX = (controller.collisions.left) ? -1 : 1;
 
         float targetVelocityX = input.x * moveSpeed;
+        //print(targetVelocityX);
         float accelerationTime = controller.collisions.below ? accelerationTimeGrounded : accelerationTimeAirborne;
         velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, accelerationTime);
 
@@ -87,7 +87,7 @@ public class Player : MonoBehaviour
 
 
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (playerActions.Jump.WasPressed)
         {
             if (wallSliding)
             {
@@ -113,7 +113,7 @@ public class Player : MonoBehaviour
 
             }
         }
-        if (Input.GetKeyUp(KeyCode.Space))
+        if (playerActions.Jump.WasReleased)
         {
             if (velocity.y > minJumpVelocity)
             {
@@ -126,6 +126,7 @@ public class Player : MonoBehaviour
 
         if (controller.collisions.above || controller.collisions.below)
         {
+            //print("Collision above or below");
             velocity.y = 0;
         }
 

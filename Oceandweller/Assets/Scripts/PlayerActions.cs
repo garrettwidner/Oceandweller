@@ -3,7 +3,10 @@ using InControl;
 
 public class PlayerActions : PlayerActionSet 
 {
-    public PlayerAction Pickup;
+    public PlayerAction Attack;
+    public PlayerAction Jump;
+    public PlayerAction LeftAction;
+    public PlayerAction RightAction;
     public PlayerAction Pause;
     public PlayerAction Quit;
     public PlayerAction Left;
@@ -26,7 +29,10 @@ public class PlayerActions : PlayerActionSet
 
     public PlayerActions()
     {
-        Pickup = CreatePlayerAction("PickUp");
+        Attack = CreatePlayerAction("Attack");
+        Jump = CreatePlayerAction("Jump");
+        LeftAction = CreatePlayerAction("LeftAction");
+        RightAction = CreatePlayerAction("RightAction");
         Pause = CreatePlayerAction("Pause");
         Quit = CreatePlayerAction("Quit");
         Left = CreatePlayerAction("Move Left");
@@ -40,8 +46,18 @@ public class PlayerActions : PlayerActionSet
     {
         PlayerActions playerActions = new PlayerActions();
 
-        playerActions.Pickup.AddDefaultBinding(InputControlType.Action1);
-        playerActions.Pickup.AddDefaultBinding(Key.K);
+        playerActions.Attack.AddDefaultBinding(InputControlType.Action3);
+        playerActions.Attack.AddDefaultBinding(Key.J);
+
+        playerActions.Jump.AddDefaultBinding(InputControlType.Action1);
+        playerActions.Jump.AddDefaultBinding(Key.K);
+        playerActions.Jump.AddDefaultBinding(Key.Space);
+
+        playerActions.LeftAction.AddDefaultBinding(InputControlType.Action4);
+        playerActions.LeftAction.AddDefaultBinding(Key.U);
+
+        playerActions.RightAction.AddDefaultBinding(InputControlType.Action2);
+        playerActions.RightAction.AddDefaultBinding(Key.I);
 
         playerActions.Pause.AddDefaultBinding(Key.Return);
         playerActions.Pause.AddDefaultBinding(InputControlType.Menu);

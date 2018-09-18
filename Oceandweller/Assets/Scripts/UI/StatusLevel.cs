@@ -36,9 +36,11 @@ public class StatusLevel : MonoBehaviour
     private float slowGoal;
     private float rapidGoal;
 
-    //public float J_TEST_RAPID_INCREMENT = 30f;
-    //public float K_TEST_SLOW_INCREMENT = 30f;
-    //public float TEST_IMMEDIATE_INCREMENT = 30f;
+    
+    public float J_TEST_RAPID_INCREMENT = 30f;
+    public float K_TEST_SLOW_INCREMENT = -5f;
+    public float L_TEST_IMMEDIATE_INCREMENT = -30f;
+    
 
     public float MaxLevel
     {
@@ -104,7 +106,11 @@ public class StatusLevel : MonoBehaviour
 
     protected virtual void Update()
     { 
-        //RunTest();
+        RunTest();
+
+        //print("Current status level: " + CurrentLevel);
+
+        
 
         if(statusLevel != 0)
         {
@@ -118,11 +124,31 @@ public class StatusLevel : MonoBehaviour
                 RunIncrement(ref rapidIncrementPool, rapidIncrementSpeed);
             }
 
-            KeepStatusBetweenBounds();
+            //KeepStatusBetweenBounds();
         }
+        else
+        {
+            if (slowIncrementPool > 0)
+            {
+                print("Status level is 0 but slow increment pool is greater than 0");
+                RunIncrement(ref slowIncrementPool, slowIncrementSpeed);
+                //KeepStatusBetweenBounds();
+
+            }
+
+            if (rapidIncrementPool > 0)
+            {
+                print("Status level is 0 but RAPID increment pool is greater than 0");
+                RunIncrement(ref rapidIncrementPool, rapidIncrementSpeed);
+                //KeepStatusBetweenBounds();
+
+            }
+        }
+        
+        KeepStatusBetweenBounds();
     }
 
-    /*
+    
     private void RunTest()
     {
         if (Input.GetKeyDown(KeyCode.J))
@@ -137,8 +163,8 @@ public class StatusLevel : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.L))
         {
-            StartImmediateIncrement(TEST_IMMEDIATE_INCREMENT);
-            print("---------- Set to increment " + TEST_IMMEDIATE_INCREMENT + " immediately.");
+            StartImmediateIncrement(L_TEST_IMMEDIATE_INCREMENT);
+            print("---------- Set to increment " + L_TEST_IMMEDIATE_INCREMENT + " immediately.");
             print(statusLevel);
         }
         else if(Input.GetKeyDown(KeyCode.N))
@@ -148,12 +174,14 @@ public class StatusLevel : MonoBehaviour
             print("Current status level: " + statusLevel);
         }
     }
-    */
+    
+    
 
     private void RunIncrement(ref float incrementPool, float incrementSpeed)
     {
         bool incrementIsEnding = false;
         float framewiseIncrement = incrementSpeed * Time.deltaTime * Mathf.Sign(incrementPool);
+        //print("Framewise increment: " + framewiseIncrement);
         if (Mathf.Abs(framewiseIncrement) > Mathf.Abs(incrementPool))
         {
             framewiseIncrement = incrementPool;
@@ -167,6 +195,7 @@ public class StatusLevel : MonoBehaviour
         if(incrementIsEnding)
         {
             KeepStatusLevelClean();
+            //incrementPool = 0f;
         }
     }
 

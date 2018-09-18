@@ -25,7 +25,7 @@ public class SpriteTexturePostProcessor : AssetPostprocessor
 		else
 		{
 			importer.textureType = TextureImporterType.Sprite;
-			//importer.spritePixelsPerUnit = 32;
+			importer.spritePixelsPerUnit = 32;
 			importer.filterMode = FilterMode.Point;
             importer.maxTextureSize = 4096;
 
