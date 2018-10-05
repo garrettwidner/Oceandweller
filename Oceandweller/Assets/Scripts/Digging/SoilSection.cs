@@ -4,14 +4,18 @@ using UnityEngine;
 
 public class SoilSection : MonoBehaviour
 {
-    public int order; //?
-
-
-    //1-3, 1 is lightest
-    public int lightness;
     public Type type;
-    public SoilSection left;
-    public SoilSection right;
+    public enum Type
+    {
+        Sand,
+        Dirt,
+        Rock,
+        Plate,
+        Bedrock
+    };
+
+    [Range(1,3)]
+    public int lightness;
 
     [Header("Sprite Setup")]
     public SpriteRenderer spriteRenderer;
@@ -21,18 +25,47 @@ public class SoilSection : MonoBehaviour
     public Sprite rightConnected;
     public Sprite noneConnected;
 
+    private SoilSection left;
+    private SoilSection right;
+
     private bool isLeftmost;
+    public bool IsLeftMost
+    {
+        get
+        {
+            return isLeftmost;
+        }
+    }
     private bool isRightmost;
+    public bool IsRightMost
+    {
+        get
+        {
+            return isRightmost;
+        }
+    }
 
     private void Start()
     {
         spriteRenderer.sprite = bothConnected;
     }
 
-    public void SetUpSoil(bool isLeftmostInLayer, bool isRightmostInLayer)
+    public void SetUpSoil(SoilSection soilToLeft, SoilSection soilToRight)
     {
-        isLeftmost = isLeftmostInLayer;
-        isRightmost = isRightmostInLayer;
+        left = soilToLeft;
+        right = soilToRight;
+
+        isLeftmost = false;
+        if(left == null)
+        {
+            isLeftmost = true;
+        }
+
+        isRightmost = false;
+        if(right = null)
+        {
+            isRightmost = true;
+        }
     }
 
     public void SoilOnSameLevelWasRemoved(SoilSection soil)
@@ -45,6 +78,11 @@ public class SoilSection : MonoBehaviour
         {
             RemoveRightSoil();
         }
+    }
+
+    public void RemoveSelf()
+    {
+        Destroy(this);
     }
 
     private void RemoveLeftSoil()
@@ -73,12 +111,5 @@ public class SoilSection : MonoBehaviour
         }
     }
 
-    public enum Type
-    {
-        Sand,
-        Dirt,
-        Rock,
-        Plate,
-        Caliche
-    };
+    
 }
