@@ -30,6 +30,44 @@ public class Player : MonoBehaviour
     Controller2D controller;
     private PlayerActions playerActions;
 
+    private float minVelocityConsideredMoving = 0.5f;
+
+    public bool IsMoving
+    {
+        get
+        {
+            if(Mathf.Abs(velocity.x) > minVelocityConsideredMoving)
+            {
+                return true;
+            }
+            return false;
+        }
+    }
+
+    public bool IsFacingRight
+    {
+        get
+        {
+            if(controller.collisions.faceDir == -1)
+            {
+                return false;
+            }
+            return true;
+        }
+    }
+
+    public bool IsGrounded
+    {
+        get
+        {
+            if(controller.collisions.below)
+            {
+                return true;
+            }
+            return false;
+        }
+    }
+
     private void Start()
     {
         controller = GetComponent<Controller2D>();
@@ -41,6 +79,8 @@ public class Player : MonoBehaviour
         //print("Gravity: " + gravity + " Jump Velocity: " + maxJumpVelocity);
 
         playerActions = PlayerActions.CreateWithDefaultBindings();
+
+        
     }
 
     private void Update()
@@ -122,6 +162,7 @@ public class Player : MonoBehaviour
         }
 
         velocity.y += gravity * Time.deltaTime;
+       
         controller.Move(velocity * Time.deltaTime, input);
 
         if (controller.collisions.above || controller.collisions.below)
@@ -130,6 +171,7 @@ public class Player : MonoBehaviour
             velocity.y = 0;
         }
 
+        print(IsMoving);
     }
 
 
