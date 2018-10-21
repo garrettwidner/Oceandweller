@@ -206,13 +206,13 @@ MonoBehaviour:
   spriteRenderer: {fileID: 265598628}
   animations:
   - name: Idle
-    fps: 3
+    fps: 2
     frames:
     - {fileID: 21300000, guid: 3681f1e62cfdf08458d61f81a5121a1c, type: 3}
     - {fileID: 21300002, guid: 3681f1e62cfdf08458d61f81a5121a1c, type: 3}
     triggers: []
   - name: Run
-    fps: 8
+    fps: 6
     frames:
     - {fileID: 21300004, guid: 3681f1e62cfdf08458d61f81a5121a1c, type: 3}
     - {fileID: 21300006, guid: 3681f1e62cfdf08458d61f81a5121a1c, type: 3}

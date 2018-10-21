@@ -27,6 +27,9 @@ public class Player : MonoBehaviour
     private Vector3 velocity;
     private float velocityXSmoothing;
 
+    //Used to smooth errors where the character shows as not grounded for only a single frame
+    private bool wasGroundedLastFrame;
+
     Controller2D controller;
     private PlayerActions playerActions;
 
@@ -60,7 +63,7 @@ public class Player : MonoBehaviour
     {
         get
         {
-            if(controller.collisions.below)
+            if(controller.collisions.below || !wasGroundedLastFrame)
             {
                 return true;
             }
@@ -171,7 +174,7 @@ public class Player : MonoBehaviour
             velocity.y = 0;
         }
 
-        print(IsMoving);
+        wasGroundedLastFrame = controller.collisions.below;
     }
 
 
