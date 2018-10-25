@@ -27,7 +27,6 @@ public class Soil : MonoBehaviour
     private void Start()
     {
         currentDepth = Random.Range(minDepth, maxStartDepth + 1);
-        print(currentDepth);
         SetSpriteFromCurrentDepth();
     }
 

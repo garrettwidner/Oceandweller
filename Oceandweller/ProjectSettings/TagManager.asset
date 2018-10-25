@@ -50,6 +50,12 @@ TagManager:
   - name: Soil
     uniqueID: 2441937705
     locked: 0
+  - name: UI Under
+    uniqueID: 27098735
+    locked: 0
+  - name: UI Mid
+    uniqueID: 2740512505
+    locked: 0
   - name: UI Over
     uniqueID: 234592845
     locked: 0
