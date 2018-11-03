@@ -4,21 +4,20 @@ using UnityEngine;
 
 public class Soil : MonoBehaviour
 {
-    public SpriteRenderer spriteRenderer;
+    public SpriteRenderer soilRenderer;
+    public SpriteRenderer wetnessRenderer;
 
-    public Sprite[] dry;
-    public Sprite[] wet;
+    public Sprite[] soilSprites;
+    public Sprite[] wetSprites;
 
     private bool isWet = false;
     private Soil left;
     private Soil right;
     private int currentDepth;
 
-    private bool isOpen = false;
+    private bool isFullyOpen = false;
 
-    private int maxStartDepth = 3;
-
-    private int maxDepth = 7;
+    private int maxDepth = 3;
     private int minDepth = 0;
 
     //If wet, when it reaches max depth, needs to spawn water block. 
@@ -26,14 +25,23 @@ public class Soil : MonoBehaviour
 
     private void Start()
     {
-        currentDepth = Random.Range(minDepth, maxStartDepth + 1);
+        currentDepth = 0;
         SetSpriteFromCurrentDepth();
     }
 
     private void SetSpriteFromCurrentDepth()
     {
-        spriteRenderer.sprite = isWet ? wet[currentDepth] : dry[currentDepth];
+        soilRenderer.sprite = soilSprites[currentDepth];
 
+        if(isWet)
+        {
+            wetnessRenderer.enabled = true;
+            wetnessRenderer.sprite = wetSprites[currentDepth];
+        }
+        else
+        {
+            wetnessRenderer.enabled = false;
+        }
     }
 
     public void Dig(int levelsDug)
