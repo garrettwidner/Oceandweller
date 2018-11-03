@@ -128,8 +128,6 @@ public class Player : MonoBehaviour
             }
         }
 
-
-
         if (playerActions.Jump.WasPressed)
         {
             if (wallSliding)
@@ -170,7 +168,6 @@ public class Player : MonoBehaviour
 
         if (controller.collisions.above || controller.collisions.below)
         {
-            //print("Collision above or below");
             velocity.y = 0;
         }
 

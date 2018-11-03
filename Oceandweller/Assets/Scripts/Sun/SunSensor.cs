@@ -4,28 +4,33 @@ using UnityEngine;
 
 public class SunSensor : MonoBehaviour
 {
-    private Sun sun;
+    protected Sun sun;
 
-    private int intensity;
+    protected int intensity;
 
-    private void OnEnable()
+    protected void OnEnable()
+    {
+        FindSunInScene();
+        sun.OnIntensityChanged += SunIntensityChanged;
+    }
+
+    protected void OnDisable()
+    {
+        sun.OnIntensityChanged -= SunIntensityChanged;
+    }
+
+    protected void FindSunInScene()
     {
         sun = FindObjectOfType<Sun>();
         intensity = sun.Intensity;
 
-        sun.OnIntensityChanged += SunIntensityChanged;
-
-        print("Sensed starting sun intensity is: " + intensity);
+        //print("Sensed starting sun intensity is: " + intensity);
     }
 
-    private void Start()
-    {
-        
-    }
 
-    private void SunIntensityChanged(int newIntensity)
+    protected void SunIntensityChanged(int newIntensity)
     {
-        print("Sensed that intensity changed to " + newIntensity);
+        //print("Sensed that intensity changed to " + newIntensity);
         intensity = newIntensity;
     }
 

@@ -1,31 +1,32 @@
 fileFormatVersion: 2
-guid: 8c143d34108f94b4caf67f539c1d0b44
+guid: 0353ee346411f09428e0b45fa25f6834
 TextureImporter:
   fileIDToRecycleName:
-    21300000: RockGround_0
-    21300002: RockGround_1
-    21300004: RockGround_2
-    21300006: RockGround_3
-    21300008: RockGround_4
-    21300010: RockGround_5
-    21300012: RockGround_6
-    21300014: RockGround_7
-    21300016: RockGround_8
-    21300018: RockGround_9
-    21300020: RockGround_10
-    21300022: RockGround_11
-    21300024: RockGround_12
-    21300026: RockGround_13
-    21300028: RockGround_14
-    21300030: RockGround_15
-    21300032: RockGround_16
-    21300034: RockGround_17
-    21300036: RockGround_18
-    21300038: RockGround_19
-    21300040: RockGround_20
-    21300042: RockGround_21
-    21300044: RockGround_22
-    21300046: RockGround_23
+    21300000: RockBackGround_0
+    21300002: RockBackGround_1
+    21300004: RockBackGround_2
+    21300006: RockBackGround_3
+    21300008: RockBackGround_4
+    21300010: RockBackGround_5
+    21300012: RockBackGround_6
+    21300014: RockBackGround_7
+    21300016: RockBackGround_8
+    21300018: RockBackGround_9
+    21300020: RockBackGround_10
+    21300022: RockBackGround_11
+    21300024: RockBackGround_12
+    21300026: RockBackGround_13
+    21300028: RockBackGround_14
+    21300030: RockBackGround_15
+    21300032: RockBackGround_16
+    21300034: RockBackGround_17
+    21300036: RockBackGround_18
+    21300038: RockBackGround_19
+    21300040: RockBackGround_20
+    21300042: RockBackGround_21
+    21300044: RockBackGround_22
+    21300046: RockBackGround_23
+    21300048: RockBackGround_24
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -108,7 +109,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: RockGround_0
+      name: RockBackGround_0
       rect:
         serializedVersion: 2
         x: 0
@@ -123,17 +124,17 @@ TextureImporter:
       - - {x: -8, y: -8}
         - {x: 8, y: -8}
         - {x: 8, y: -8}
-        - {x: 8, y: -8}
+        - {x: 1, y: -8}
         - {x: -8, y: -8}
       tessellationDetail: 0
       bones: []
-      spriteID: c2089b9c057847344a24611d41b6b059
+      spriteID: f0909636bd97644458f562da5a757a8b
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RockGround_1
+      name: RockBackGround_1
       rect:
         serializedVersion: 2
         x: 16
@@ -146,19 +147,20 @@ TextureImporter:
       outline: []
       physicsShape:
       - - {x: -8, y: 8}
-        - {x: -8, y: -8}
+        - {x: -8, y: 7}
+        - {x: 7, y: -8}
         - {x: 8, y: -8}
         - {x: 8, y: -8}
         - {x: -8, y: 8}
       tessellationDetail: 0
       bones: []
-      spriteID: 773f655c0b06ead4bbec31a964673b39
+      spriteID: e901e8b3ae76878458ecee965a626ff5
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RockGround_2
+      name: RockBackGround_2
       rect:
         serializedVersion: 2
         x: 32
@@ -173,17 +175,18 @@ TextureImporter:
       - - {x: 8, y: 8}
         - {x: -8, y: -8}
         - {x: -8, y: -8}
-        - {x: 8, y: -8}
+        - {x: -7, y: -8}
+        - {x: 8, y: 7}
         - {x: 8, y: 8}
       tessellationDetail: 0
       bones: []
-      spriteID: 4f59b32aaedf4714680e9ad0b08d3751
+      spriteID: bd372d7e2feb3204c8f5af02c3bfe779
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RockGround_3
+      name: RockBackGround_3
       rect:
         serializedVersion: 2
         x: 48
@@ -197,19 +200,20 @@ TextureImporter:
       physicsShape:
       - - {x: -8, y: 4}
         - {x: -8, y: 4}
-        - {x: -8, y: -8}
+        - {x: -8, y: 3}
+        - {x: 7, y: -8}
         - {x: 8, y: -8}
         - {x: 8, y: -8}
-        - {x: 8, y: -8}
+        - {x: -8, y: 4}
       tessellationDetail: 0
       bones: []
-      spriteID: 020053806b1cae8459e640863bcdef89
+      spriteID: aba61ef67db940149aa83fd5756c30da
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RockGround_4
+      name: RockBackGround_4
       rect:
         serializedVersion: 2
         x: 64
@@ -223,18 +227,19 @@ TextureImporter:
       physicsShape:
       - - {x: -8, y: -8}
         - {x: -8, y: -8}
-        - {x: 8, y: -8}
+        - {x: -7, y: -8}
+        - {x: 8, y: 3}
         - {x: 8, y: 4}
         - {x: 8, y: 4}
       tessellationDetail: 0
       bones: []
-      spriteID: f0ff120b0be5f1f4b8ec48f2c6e88f21
+      spriteID: ea6bfd6f71ae7154cb5e2bceb6bf4364
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RockGround_5
+      name: RockBackGround_5
       rect:
         serializedVersion: 2
         x: 80
@@ -248,18 +253,18 @@ TextureImporter:
       physicsShape:
       - - {x: 8, y: 8}
         - {x: -8, y: -4}
-        - {x: -8, y: -8}
-        - {x: 8, y: -8}
+        - {x: -8, y: -5}
+        - {x: 8, y: 7}
         - {x: 8, y: 8}
       tessellationDetail: 0
       bones: []
-      spriteID: c9f6965114adde84fad650398a6955ff
+      spriteID: 2e7f1e2b86f0fe74b9a7b23d4458d691
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RockGround_6
+      name: RockBackGround_6
       rect:
         serializedVersion: 2
         x: 96
@@ -273,23 +278,19 @@ TextureImporter:
       physicsShape:
       - - {x: -8, y: 8}
         - {x: -8, y: 8}
-        - {x: -8, y: -8}
-        - {x: 8, y: -8}
-        - {x: 8, y: -4}
-        - {x: 8, y: -4}
-      - - {x: 8, y: -4}
-        - {x: 8, y: -4}
+        - {x: -8, y: 7}
+        - {x: 8, y: -5}
         - {x: 8, y: -4}
         - {x: 8, y: -4}
       tessellationDetail: 0
       bones: []
-      spriteID: c05355447f234014a8198331171e087c
+      spriteID: 0b6a87083ef4ae2439976871b4d396ca
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RockGround_7
+      name: RockBackGround_7
       rect:
         serializedVersion: 2
         x: 112
@@ -303,18 +304,19 @@ TextureImporter:
       physicsShape:
       - - {x: -8, y: -8}
         - {x: -8, y: -8}
-        - {x: 8, y: -8}
+        - {x: -6, y: -8}
+        - {x: 8, y: -1}
         - {x: 8, y: 0}
         - {x: 8, y: 0}
       tessellationDetail: 0
       bones: []
-      spriteID: 171a350bed32a0046b6832b1e9c8a9d3
+      spriteID: 46a251cd639d3fe40af0eae190d48e07
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RockGround_8
+      name: RockBackGround_8
       rect:
         serializedVersion: 2
         x: 128
@@ -328,18 +330,18 @@ TextureImporter:
       physicsShape:
       - - {x: 8, y: 8}
         - {x: -8, y: 0}
-        - {x: -8, y: -8}
-        - {x: 8, y: -8}
+        - {x: -8, y: -1}
+        - {x: 8, y: 7}
         - {x: 8, y: 8}
       tessellationDetail: 0
       bones: []
-      spriteID: 2f5e0a49b54f79d4991351e99e2af9c9
+      spriteID: 5869471d64586864e94d98b6986c44d2
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RockGround_9
+      name: RockBackGround_9
       rect:
         serializedVersion: 2
         x: 144
@@ -352,19 +354,19 @@ TextureImporter:
       outline: []
       physicsShape:
       - - {x: -8, y: 8}
-        - {x: -8, y: -8}
-        - {x: 8, y: -8}
+        - {x: -8, y: 7}
+        - {x: 8, y: -1}
         - {x: 8, y: 0}
         - {x: -8, y: 8}
       tessellationDetail: 0
       bones: []
-      spriteID: 69daa4e1ccb87f24182e8351476e08fe
+      spriteID: 14993184a674b08439d60812b381dc1a
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RockGround_10
+      name: RockBackGround_10
       rect:
         serializedVersion: 2
         x: 160
@@ -377,19 +379,20 @@ TextureImporter:
       outline: []
       physicsShape:
       - - {x: -8, y: 0}
-        - {x: -8, y: -8}
+        - {x: -8, y: -1}
+        - {x: 6, y: -8}
         - {x: 8, y: -8}
         - {x: 8, y: -8}
         - {x: -8, y: 0}
       tessellationDetail: 0
       bones: []
-      spriteID: 0563e7c972cf7c34698b0f1806e3adf3
+      spriteID: 702c9abbff764324b9bd3f23df447cac
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RockGround_11
+      name: RockBackGround_11
       rect:
         serializedVersion: 2
         x: 0
@@ -401,19 +404,19 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: -8, y: 8}
-        - {x: -8, y: -8}
-        - {x: 8, y: -8}
+      - - {x: -8, y: 7}
+        - {x: 8, y: 7}
         - {x: 8, y: 8}
+        - {x: -8, y: 8}
       tessellationDetail: 0
       bones: []
-      spriteID: 0b861a295553e764fb879ed6c1dcc06a
+      spriteID: c6c12c3ae1d69714e8ef623d6955596f
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RockGround_12
+      name: RockBackGround_12
       rect:
         serializedVersion: 2
         x: 16
@@ -426,23 +429,19 @@ TextureImporter:
       outline: []
       physicsShape:
       - - {x: -8, y: -8}
-        - {x: -8, y: -8}
-        - {x: 8, y: -8}
-        - {x: 8, y: -4}
-        - {x: -8, y: -8}
-      - - {x: 8, y: -4}
-        - {x: 8, y: -4}
+        - {x: -5, y: -8}
+        - {x: 8, y: -5}
         - {x: 8, y: -4}
         - {x: 8, y: -4}
       tessellationDetail: 0
       bones: []
-      spriteID: 48a9d72a49c62d9408817a5b32433738
+      spriteID: 4ef8fa79389ee1141a651dd0f399fc02
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RockGround_13
+      name: RockBackGround_13
       rect:
         serializedVersion: 2
         x: 32
@@ -456,18 +455,18 @@ TextureImporter:
       physicsShape:
       - - {x: -8, y: -4}
         - {x: -8, y: -4}
-        - {x: -8, y: -8}
-        - {x: 8, y: -8}
+        - {x: -8, y: -5}
+        - {x: 8, y: -1}
         - {x: 8, y: 0}
       tessellationDetail: 0
       bones: []
-      spriteID: 0d49dcba32a01d8409c6f09fb7e8a849
+      spriteID: 5b86a36b2e3ffdd45a4b52537781ec9b
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RockGround_14
+      name: RockBackGround_14
       rect:
         serializedVersion: 2
         x: 48
@@ -481,18 +480,18 @@ TextureImporter:
       physicsShape:
       - - {x: -8, y: 0}
         - {x: -8, y: 0}
-        - {x: -8, y: -8}
-        - {x: 8, y: -8}
+        - {x: -8, y: -1}
+        - {x: 8, y: 3}
         - {x: 8, y: 4}
       tessellationDetail: 0
       bones: []
-      spriteID: 4367cadffa1e2754aba0cde0d226805d
+      spriteID: 0ddbc55747c87004485ddd6e19da2532
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RockGround_15
+      name: RockBackGround_15
       rect:
         serializedVersion: 2
         x: 64
@@ -506,18 +505,18 @@ TextureImporter:
       physicsShape:
       - - {x: -8, y: 4}
         - {x: -8, y: 4}
-        - {x: -8, y: -8}
-        - {x: 8, y: -8}
+        - {x: -8, y: 3}
+        - {x: 8, y: 7}
         - {x: 8, y: 8}
       tessellationDetail: 0
       bones: []
-      spriteID: 617fff8d96944594d827bfd748bb9832
+      spriteID: ff7b1447afdb12f47b7fd7a99b99900c
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RockGround_16
+      name: RockBackGround_16
       rect:
         serializedVersion: 2
         x: 80
@@ -530,18 +529,18 @@ TextureImporter:
       outline: []
       physicsShape:
       - - {x: -8, y: 8}
-        - {x: -8, y: -8}
-        - {x: 8, y: -8}
+        - {x: -8, y: 7}
+        - {x: 8, y: 3}
         - {x: 8, y: 4}
       tessellationDetail: 0
       bones: []
-      spriteID: 1c5a523685eae9c4fa3ee2701572879c
+      spriteID: f957007012f73ab47ac0a17fd5fafcea
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RockGround_17
+      name: RockBackGround_17
       rect:
         serializedVersion: 2
         x: 96
@@ -554,19 +553,19 @@ TextureImporter:
       outline: []
       physicsShape:
       - - {x: -8, y: 4}
-        - {x: -8, y: -8}
-        - {x: 8, y: -8}
+        - {x: -8, y: 3}
+        - {x: 8, y: -1}
         - {x: 8, y: 0}
         - {x: -8, y: 4}
       tessellationDetail: 0
       bones: []
-      spriteID: 5f03710f915e439459da81b1fad06a37
+      spriteID: fbae1c41d498e8948a19c54da5dee7e5
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RockGround_18
+      name: RockBackGround_18
       rect:
         serializedVersion: 2
         x: 112
@@ -579,19 +578,19 @@ TextureImporter:
       outline: []
       physicsShape:
       - - {x: -8, y: 0}
-        - {x: -8, y: -8}
-        - {x: 8, y: -8}
+        - {x: -8, y: -1}
+        - {x: 8, y: -5}
         - {x: 8, y: -4}
         - {x: -8, y: 0}
       tessellationDetail: 0
       bones: []
-      spriteID: 5fefabeb2a82610479bfcbe80cabf7b0
+      spriteID: 6ffaafe85f9c8304a9c96c2718411c1e
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RockGround_19
+      name: RockBackGround_19
       rect:
         serializedVersion: 2
         x: 128
@@ -604,19 +603,20 @@ TextureImporter:
       outline: []
       physicsShape:
       - - {x: -8, y: -4}
-        - {x: -8, y: -8}
+        - {x: -8, y: -5}
+        - {x: 5, y: -8}
         - {x: 8, y: -8}
         - {x: 8, y: -8}
         - {x: -8, y: -4}
       tessellationDetail: 0
       bones: []
-      spriteID: 22d72e9431f3eee4481a9dee00f11967
+      spriteID: 4c835dd463167944d9dabace6e48b3b0
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RockGround_20
+      name: RockBackGround_20
       rect:
         serializedVersion: 2
         x: 144
@@ -624,19 +624,23 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -8, y: 8}
+        - {x: -8, y: 7}
+        - {x: 8, y: 7}
+        - {x: 8, y: 8}
       tessellationDetail: 0
       bones: []
-      spriteID: 1f61050b7ebd4f34f95910c14be537b0
+      spriteID: 1e540a31c3246574e83e1830800d60cc
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RockGround_21
+      name: RockBackGround_21
       rect:
         serializedVersion: 2
         x: 160
@@ -644,19 +648,23 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -8, y: -1}
+        - {x: 8, y: -1}
+        - {x: 8, y: 0}
+        - {x: -8, y: 0}
       tessellationDetail: 0
       bones: []
-      spriteID: c6b7525fe44c09a49bb9d1bcd7c2547c
+      spriteID: 611a9372fa08a8148b29ead13ac2d7d7
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RockGround_22
+      name: RockBackGround_22
       rect:
         serializedVersion: 2
         x: 0
@@ -664,19 +672,19 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aeecafaf6d444064ebab66266f5b3caa
+      spriteID: 4ea4a9a8be9f95c4793c425c261626cd
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RockGround_23
+      name: RockBackGround_23
       rect:
         serializedVersion: 2
         x: 16
@@ -684,13 +692,37 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: de4e1d57e2f0ef243a716b7eb251ad6a
+      spriteID: 94c422e201a2a684d9aa3cf8e36bcd38
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RockBackGround_24
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -8, y: -8}
+        - {x: -8, y: -8}
+        - {x: -8, y: -8}
+        - {x: -8, y: -8}
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe6e14e60fb657e47a549e445107a274
       vertices: []
       indices: 
       edges: []
@@ -698,7 +730,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 08d6466f320c68a419f5bb30c513b814
+    spriteID: cc40e9fe371615342875ef03b38988dc
     vertices: []
     indices: 
     edges: []

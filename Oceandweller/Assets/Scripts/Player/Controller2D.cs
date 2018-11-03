@@ -7,6 +7,8 @@ public class Controller2D : RaycastController
     private float maxClimbingAngle = 80.0f;
     private float maxDescendAngle = 75.0f;
 
+    private float fallingThroughPlatformResetTime = .5f;
+
     public CollisionInfo collisions;
     [HideInInspector]public Vector2 playerInput;
 
@@ -41,10 +43,16 @@ public class Controller2D : RaycastController
 
         HorizontalCollisions(ref velocity);
 
+        //The old way, before testing way to fix sometimes not falling through platforms
+        /*
         if (velocity.y != 0)
         {
             VerticalCollisions(ref velocity);
         }
+        */
+
+        //The new way
+        VerticalCollisions(ref velocity);
 
         transform.Translate(velocity);
 
@@ -76,10 +84,15 @@ public class Controller2D : RaycastController
             if (hit)
             {
                 //skip this raycasthit in order to not get stuck inside boxes
+                //**Turning off because after falling through an upper platform
+                //the player's location in relation to colliders never corrects
+                /*
                 if (hit.distance == 0)
                 {
+                    print("Hit distance is 0");
                     continue;
                 }
+                */
                 float slopeAngle = Vector2.Angle(hit.normal, Vector2.up);
                 if (i == 0 && slopeAngle <= maxClimbingAngle)
                 {
@@ -95,7 +108,7 @@ public class Controller2D : RaycastController
                         distanceToSlopeStart = hit.distance - SkinWidth;
                         velocity.x -= distanceToSlopeStart * directionX;
                     }
-                    ClimbSlope(ref velocity, slopeAngle);
+                    AscendSlope(ref velocity, slopeAngle);
                     velocity.x += distanceToSlopeStart * directionX;
                 }
 
@@ -134,6 +147,11 @@ public class Controller2D : RaycastController
 
             if (hit)
             {
+                if (collisions.fallingThroughPlatform)
+                {
+                   // print("And there was a hit");
+                }
+
                 if (hit.collider.tag == "Through")
                 {
                     if (directionY == 1 || hit.distance == 0 )
@@ -142,12 +160,14 @@ public class Controller2D : RaycastController
                     }
                     if (collisions.fallingThroughPlatform)
                     {
+                        //print("Should be falling through platform");
                         continue;
                     }
                     if (playerInput.y == -1)
                     {
+                        //print("Told to fall through platform");
                         collisions.fallingThroughPlatform = true;
-                        Invoke("ResetFallingThroughPlatform", 1f);
+                        Invoke("ResetFallingThroughPlatform", fallingThroughPlatformResetTime);
                         continue;
                     }
                 }
@@ -162,9 +182,17 @@ public class Controller2D : RaycastController
                 collisions.below = directionY == -1 ? true : false;
                 collisions.above = directionY == 1 ? true : false;
             }
+            //Handles case of player not being able to trigger platform fallthrough 
+            //when player is moving up a slope (since directionY is 1)
+            else if(playerInput.y == -1 && directionY != -1)
+            {
+                collisions.fallingThroughPlatform = true;
+                print("Trying to fall through the platform the back way");
+                Invoke("ResetFallingThroughPlatform", fallingThroughPlatformResetTime);
+            }
         }
 
-        //Deals with getting stuck when changing from one slope grade to another
+        //Handles getting stuck when changing from one slope grade to another
         if (collisions.climbingSlope)
         {
             float directionX = Mathf.Sign(velocity.x);
@@ -184,8 +212,14 @@ public class Controller2D : RaycastController
         }
     }
 
-    private void ClimbSlope(ref Vector3 velocity, float slopeAngle)
+    private void AscendSlope(ref Vector3 velocity, float slopeAngle)
     {
+        //Allows falling through platforms while moving up a slope
+        if(collisions.fallingThroughPlatform)
+        {
+            return;
+        }
+
         float moveDistance = Mathf.Abs(velocity.x);
         float climbVelocityY = Mathf.Sin(slopeAngle * Mathf.Deg2Rad) * moveDistance;
         if (velocity.y <= climbVelocityY)
