@@ -4,38 +4,102 @@ using UnityEngine;
 
 public class SunSensor : MonoBehaviour
 {
+    public LayerMask shadeLayer;
+    public BoxCollider2D shadeCheckArea;
+
     protected Sun sun;
 
-    protected int intensity;
+    protected int sunIntensity;
+    protected int sensedIntensity;
 
-    protected void OnEnable()
+    protected bool isShaded = false;
+    public bool IsShaded
+    {
+        get
+        {
+            return isShaded;
+        }
+    }
+
+    protected bool previousShadeStatus;
+
+    public delegate void SensorAction(bool newStatus);
+    public event SensorAction OnShadeStatusChanged;
+
+
+    protected virtual void OnEnable()
     {
         FindSunInScene();
         sun.OnIntensityChanged += SunIntensityChanged;
     }
 
-    protected void OnDisable()
+    protected virtual void OnDisable()
     {
         sun.OnIntensityChanged -= SunIntensityChanged;
     }
 
-    protected void FindSunInScene()
+    protected void Start()
+    {
+        sunIntensity = sun.Intensity;
+    }
+
+    protected virtual void FindSunInScene()
     {
         sun = FindObjectOfType<Sun>();
-        intensity = sun.Intensity;
+        sunIntensity = sun.Intensity;
 
         //print("Sensed starting sun intensity is: " + intensity);
     }
 
-
-    protected void SunIntensityChanged(int newIntensity)
+    protected virtual void SunIntensityChanged(int newIntensity)
     {
         //print("Sensed that intensity changed to " + newIntensity);
-        intensity = newIntensity;
+        sunIntensity = newIntensity;
     }
 
+    protected virtual void Update()
+    {
+        CheckIfShaded();
+        GetSensedIntensity();
+        print("Current intensity for " + transform.parent.gameObject.name + " is " + sensedIntensity);
+    }
+
+    public void CheckIfShaded()
+    {
+        previousShadeStatus = IsShaded;
+
+        Collider2D foundShadeCollider = Physics2D.OverlapArea(shadeCheckArea.bounds.min, shadeCheckArea.bounds.max, shadeLayer);
+
+        if (foundShadeCollider != null)
+        {
+            isShaded = true;
+        }
+        else
+        {
+            isShaded = false;
+        }
+
+        if(IsShaded != previousShadeStatus)
+        {
+            if(OnShadeStatusChanged != null)
+            {
+                OnShadeStatusChanged(IsShaded);
+            }
+        }
 
 
+    }
 
+    public void GetSensedIntensity()
+    {
+        if(IsShaded)
+        {
+            sensedIntensity = 0;
+        }
+        else
+        {
+            sensedIntensity = sunIntensity;
+        }
+    }
 
 }

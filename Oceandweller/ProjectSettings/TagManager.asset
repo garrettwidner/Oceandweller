@@ -17,7 +17,7 @@ TagManager:
   - Player
   - Terrain
   - Soil
-  - 
+  - Shade
   - 
   - 
   - 
@@ -45,11 +45,17 @@ TagManager:
   - name: BaseTerrain
     uniqueID: 1292851593
     locked: 0
+  - name: Plants
+    uniqueID: 1525493085
+    locked: 0
   - name: Player
     uniqueID: 4245599375
     locked: 0
   - name: Soil
     uniqueID: 2441937705
+    locked: 0
+  - name: Soil Top
+    uniqueID: 2448225461
     locked: 0
   - name: UI Under
     uniqueID: 27098735
