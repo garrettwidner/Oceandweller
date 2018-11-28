@@ -61,7 +61,7 @@ public class SunSensor : MonoBehaviour
     {
         CheckIfShaded();
         GetSensedIntensity();
-        print("Current intensity for " + transform.parent.gameObject.name + " is " + sensedIntensity);
+        //print("Current intensity for " + transform.parent.gameObject.name + " is " + sensedIntensity);
     }
 
     public void CheckIfShaded()

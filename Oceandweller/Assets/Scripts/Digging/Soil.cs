@@ -8,13 +8,15 @@ public class Soil : MonoBehaviour
     public SpriteRenderer wetnessRenderer;
     public LayerMask soilLayer;
 
-    public bool showsWetnessAtFirstLevel = false;
+    public bool startsWet = false;
 
-    public Sprite[] soilSprites;
-    public Sprite[] wetSprites;
+    public delegate void SoilInfoAction(bool isLeftEmpty, bool isRightEmpty, int depth, bool wet);
+    public SoilInfoAction OnMaxDepthReached;
+    public SoilInfoAction OnDepthChanged;
+    public SoilInfoAction OnWetnessChanged;
 
-    public delegate void SoilAction();
-    public SoilAction OnMaxDepthReached;
+    public SoilInfoAction OnAdjacentMaxDepthReached;
+    public SoilInfoAction OnAdjacentWetnessChanged;
 
     private BoxCollider2D boxCollider;
 
@@ -32,11 +34,52 @@ public class Soil : MonoBehaviour
     }
     private bool isAtMaxDepth = false;
 
+    public bool IsEmpty
+    {
+        get
+        {
+            if(IsAtMaxDepth && !isWet)
+            {
+                return true;
+            }
+            return false;
+        }
+    }
+
+    public bool IsLeftEmpty
+    {
+        get
+        {
+            if(left != null && left.IsEmpty)
+            {
+                return true;
+            }
+            return false;
+        }
+    }
+
+    public bool IsRightEmpty
+    {
+        get
+        {
+            if(right!= null && right.IsEmpty)
+            {
+                return true;
+            }
+            return false;
+        }
+    }
+
+    public bool IsWet
+    {
+        get
+        {
+            return isWet;
+        }
+    }
+
     private int maxDepth = 3;
     private int minDepth = 0;
-
-    //If wet, when it reaches max depth, needs to spawn water block. 
-    //Only once water is taken from a cell will the cell open at the sides to connect with other cells.
 
     private void Start()
     {
@@ -44,27 +87,37 @@ public class Soil : MonoBehaviour
         currentDepth = 0;
         FindAdjacentSoils();
 
-        if (left != null)
+        if (startsWet)
         {
-            left.OnMaxDepthReached += SetSpriteFromCurrentDepth;
-        }
-        if (right != null)
-        {
-            right.OnMaxDepthReached += SetSpriteFromCurrentDepth;
+            isWet = true;
         }
 
-        SetSpriteFromCurrentDepth();
+        if (left != null)
+        {
+            left.OnMaxDepthReached += AdjacentMaxDepthReached;
+            left.OnWetnessChanged += AdjacentWetnessChanged;
+        }
+
+        if (right != null)
+        {
+            right.OnMaxDepthReached += AdjacentMaxDepthReached;
+            right.OnWetnessChanged += AdjacentWetnessChanged;
+        }
+
+        DepthChanged();
     }
 
     private void OnDisable()
     {
         if (left != null)
         {
-            left.OnMaxDepthReached -= SetSpriteFromCurrentDepth;
+            left.OnMaxDepthReached -= AdjacentMaxDepthReached;
+            left.OnWetnessChanged -= AdjacentWetnessChanged;
         }
         if (right != null)
         {
-            right.OnMaxDepthReached -= SetSpriteFromCurrentDepth;
+            right.OnMaxDepthReached -= AdjacentMaxDepthReached;
+            right.OnWetnessChanged -= AdjacentWetnessChanged;
         }
     }
 
@@ -90,70 +143,30 @@ public class Soil : MonoBehaviour
         return null;
     }
 
-    private void SetSpriteFromCurrentDepth()
+    private void AdjacentMaxDepthReached(bool isLeftEmpty, bool isRightEmpty, int depth, bool isWet)
     {
-        //print("Setting sprite depth for " + gameObject.name);
-        soilRenderer.sprite = soilSprites[currentDepth];
-        wetnessRenderer.sprite = wetSprites[currentDepth];
-
-        if(currentDepth == 0 && isWet)
+        if(OnAdjacentMaxDepthReached != null)
         {
-            if(showsWetnessAtFirstLevel)
-            {
-                wetnessRenderer.enabled = true;
-                wetnessRenderer.sprite = wetSprites[currentDepth];
-            }
-        }
-        else if (currentDepth != 0 && isWet)
-        {
-            wetnessRenderer.enabled = true;
-            wetnessRenderer.sprite = wetSprites[currentDepth];
-        }
-        else
-        {
-            wetnessRenderer.enabled = false;
-        }
-
-        if(currentDepth == maxDepth)
-        {
-            //print("Depth is max depth. Setting accordingly for " + gameObject.name);
-            int deepIndex = 0;
-
-            bool isRightOpen = false;
-            bool isLeftOpen = false;
-
-            if(left != null && left.isAtMaxDepth && !left.isWet)
-            {
-                isLeftOpen = true;
-            }
-            if(right != null && right.isAtMaxDepth && !right.isWet)
-            {
-                isRightOpen = true;
-            }
-
-            print("For " + gameObject.name + " Right open: " + isRightOpen + "  Left open: " + isLeftOpen);
-
-            if(isRightOpen && isLeftOpen)
-            {
-                deepIndex = 5;
-            }
-            else if(isLeftOpen)
-            {
-                deepIndex = 6;
-            }
-            else if(isRightOpen)
-            {
-                deepIndex = 4;
-            }
-            else
-            {
-                deepIndex = 3;
-            }
-
-            soilRenderer.sprite = soilSprites[deepIndex];
-            wetnessRenderer.sprite = wetSprites[deepIndex];
+            OnAdjacentMaxDepthReached(IsLeftEmpty, IsRightEmpty, currentDepth, IsWet);
         }
     }
+
+    private void AdjacentWetnessChanged(bool isLeftEmpty, bool isRightEmpty, int depth, bool isWet)
+    {
+        if(OnAdjacentWetnessChanged != null)
+        {
+            OnAdjacentWetnessChanged(IsLeftEmpty, IsRightEmpty, currentDepth, IsWet);
+        }
+    }
+
+    private void DepthChanged()
+    {
+        if (OnDepthChanged != null)
+        {
+            OnDepthChanged(IsLeftEmpty, IsRightEmpty, currentDepth, IsWet);
+        }
+    }
+
 
     public void Dig(int levelsDug)
     {
@@ -177,7 +190,7 @@ public class Soil : MonoBehaviour
             isAtMaxDepth = true;
             if(OnMaxDepthReached != null)
             {
-                OnMaxDepthReached();
+                OnMaxDepthReached(IsLeftEmpty, IsRightEmpty, currentDepth, isWet);
             }
         }
         else
@@ -185,13 +198,47 @@ public class Soil : MonoBehaviour
             isAtMaxDepth = false;
         }
 
-        SetSpriteFromCurrentDepth();
+        if (OnDepthChanged != null)
+        {
+            OnDepthChanged(IsLeftEmpty, IsRightEmpty, currentDepth, isWet);
+        }
     }
 
     public void MakeSoilWet()
     {
-        isWet = true;
-        SetSpriteFromCurrentDepth();
+        if(!IsWet)
+        {
+            isWet = true;
+            if (OnWetnessChanged != null)
+            {
+                OnWetnessChanged(IsLeftEmpty, IsRightEmpty, currentDepth, IsWet);
+            }
+        }
+
+    }
+
+    public void MakeSoilDry()
+    {
+        if(IsWet)
+        {
+            isWet = false;
+            if (OnWetnessChanged != null)
+            {
+                OnWetnessChanged(IsLeftEmpty, IsRightEmpty, currentDepth, IsWet);
+            }
+        }
+    }
+
+    public void ChangeWetness()
+    {
+        if (isWet)
+        {
+            MakeSoilDry();
+        }
+        else
+        {
+            MakeSoilWet();
+        }
     }
 
     private void Update()
@@ -208,11 +255,11 @@ public class Soil : MonoBehaviour
             print(gameObject.name + " is wet: " + isWet);
         }
 
-        if(Input.GetKeyDown(KeyCode.H))
+        if(Input.GetKeyDown(KeyCode.L))
         {
-            print("Switching soil wetness state");
-            isWet = !isWet;
-            SetSpriteFromCurrentDepth();
+            print("-------------------");
         }
+
+
     }
 }

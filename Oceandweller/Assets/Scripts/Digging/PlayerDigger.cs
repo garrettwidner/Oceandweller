@@ -13,6 +13,11 @@ public class PlayerDigger : MonoBehaviour
         soil.Dig(digStrength);
     }
 
+    public void ChangeWetness(Soil soil)
+    {
+        soil.ChangeWetness();
+    }
+
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.J))
@@ -21,6 +26,14 @@ public class PlayerDigger : MonoBehaviour
             if(collider != null)
             {
                 Dig(collider.GetComponent<Soil>());
+            }
+        }
+        else if(Input.GetKeyDown(KeyCode.U))
+        {
+            Collider2D collider = Physics2D.OverlapPoint(digLocation.position, soilLayer);
+            if (collider != null)
+            {
+                ChangeWetness(collider.GetComponent<Soil>());
             }
         }
     }

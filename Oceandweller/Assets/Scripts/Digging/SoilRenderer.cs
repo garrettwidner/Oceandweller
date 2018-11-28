@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SoilRenderer : MonoBehaviour {
+public abstract class SoilRenderer : MonoBehaviour
+{
+    public Soil soil;
+    public SpriteRenderer spriteRenderer;
+    public Sprite[] levels;
+    public Sprite leftOpen;
+    public Sprite rightOpen;
+    public Sprite bothOpen;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public abstract void SetSoilSprite(bool isLeftEmpty, bool isRightEmpty, int depth, bool isWet);
+
 }

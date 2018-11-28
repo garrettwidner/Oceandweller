@@ -36,11 +36,11 @@ public class StatusLevel : MonoBehaviour
     private float slowGoal;
     private float rapidGoal;
 
-    
+    /*
     public float J_TEST_RAPID_INCREMENT = 30f;
     public float K_TEST_SLOW_INCREMENT = -5f;
     public float L_TEST_IMMEDIATE_INCREMENT = -30f;
-    
+    */
 
     public float MaxLevel
     {
@@ -106,7 +106,9 @@ public class StatusLevel : MonoBehaviour
 
     protected virtual void Update()
     { 
+        /*
         RunTest();
+        */
 
         //print("Current status level: " + CurrentLevel);
 
@@ -148,7 +150,7 @@ public class StatusLevel : MonoBehaviour
         KeepStatusBetweenBounds();
     }
 
-    
+    /*
     private void RunTest()
     {
         if (Input.GetKeyDown(KeyCode.J))
@@ -174,7 +176,7 @@ public class StatusLevel : MonoBehaviour
             print("Current status level: " + statusLevel);
         }
     }
-    
+    */
     
 
     private void RunIncrement(ref float incrementPool, float incrementSpeed)
