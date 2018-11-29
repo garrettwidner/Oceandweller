@@ -8,9 +8,16 @@ public class PlayerDigger : MonoBehaviour
     public Transform digLocation;
     public int digStrength = 1;
 
+    public delegate void DigAction();
+    public DigAction OnDigStarted;
+
     public void Dig(Soil soil)
     {
         soil.Dig(digStrength);
+        if(OnDigStarted != null)
+        {
+            OnDigStarted();
+        }
     }
 
     public void ChangeWetness(Soil soil)

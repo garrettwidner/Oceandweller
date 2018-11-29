@@ -262,22 +262,32 @@ MonoBehaviour:
   - name: Idle
     fps: 2
     frames:
-    - {fileID: 21300000, guid: 3681f1e62cfdf08458d61f81a5121a1c, type: 3}
-    - {fileID: 21300002, guid: 3681f1e62cfdf08458d61f81a5121a1c, type: 3}
+    - {fileID: 21300008, guid: 45aa52bdb5f23e34ba95951e776ae5ff, type: 3}
+    - {fileID: 21300010, guid: 45aa52bdb5f23e34ba95951e776ae5ff, type: 3}
     triggers: []
   - name: Run
     fps: 6
     frames:
-    - {fileID: 21300004, guid: 3681f1e62cfdf08458d61f81a5121a1c, type: 3}
-    - {fileID: 21300006, guid: 3681f1e62cfdf08458d61f81a5121a1c, type: 3}
-    - {fileID: 21300008, guid: 3681f1e62cfdf08458d61f81a5121a1c, type: 3}
-    - {fileID: 21300006, guid: 3681f1e62cfdf08458d61f81a5121a1c, type: 3}
+    - {fileID: 21300012, guid: 45aa52bdb5f23e34ba95951e776ae5ff, type: 3}
+    - {fileID: 21300014, guid: 45aa52bdb5f23e34ba95951e776ae5ff, type: 3}
+    - {fileID: 21300016, guid: 45aa52bdb5f23e34ba95951e776ae5ff, type: 3}
+    - {fileID: 21300014, guid: 45aa52bdb5f23e34ba95951e776ae5ff, type: 3}
     triggers: []
   - name: Jump
     fps: 0
     frames:
-    - {fileID: 21300010, guid: 3681f1e62cfdf08458d61f81a5121a1c, type: 3}
+    - {fileID: 21300018, guid: 45aa52bdb5f23e34ba95951e776ae5ff, type: 3}
     triggers: []
+  - name: Dig
+    fps: 10
+    frames:
+    - {fileID: 21300000, guid: 45aa52bdb5f23e34ba95951e776ae5ff, type: 3}
+    - {fileID: 21300002, guid: 45aa52bdb5f23e34ba95951e776ae5ff, type: 3}
+    - {fileID: 21300004, guid: 45aa52bdb5f23e34ba95951e776ae5ff, type: 3}
+    - {fileID: 21300006, guid: 45aa52bdb5f23e34ba95951e776ae5ff, type: 3}
+    triggers:
+    - frame: 3
+      name: DigAnimationFinished
   playAnimationOnStart: 
 --- !u!114 &265598630
 MonoBehaviour:
@@ -293,6 +303,7 @@ MonoBehaviour:
   spriteAnimator: {fileID: 265598629}
   player: {fileID: 672307660}
   spriteTransform: {fileID: 265598627}
+  digger: {fileID: 1201530938}
 --- !u!1 &286287423
 GameObject:
   m_ObjectHideFlags: 0
@@ -1043,6 +1054,8 @@ MonoBehaviour:
   wallLeap: {x: 15, y: 15}
   wallSlideSpeedMax: 3
   wallStickTime: 0.25
+  digger: {fileID: 1201530938}
+  animationHandler: {fileID: 265598630}
 --- !u!4 &672307661
 Transform:
   m_ObjectHideFlags: 0

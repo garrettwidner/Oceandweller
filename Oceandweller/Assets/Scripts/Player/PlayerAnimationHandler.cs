@@ -7,35 +7,71 @@ public class PlayerAnimationHandler : MonoBehaviour
     public SpriteAnimator spriteAnimator;
     public Player player;
     public Transform spriteTransform;
+    public PlayerDigger digger;
+
+    private bool isPlayingSingleAnimation = false;
+
+    public delegate void AnimationAction();
+    public AnimationAction OnDigEnded;
+
+    private void OnEnable()
+    {
+        digger.OnDigStarted += StartDigging;
+    }
+
+    private void OnDisable()
+    {
+        digger.OnDigStarted -= StartDigging;
+    }
 
     private void Update()
     {
-        if(player.IsFacingRight)
+        if(!isPlayingSingleAnimation)
         {
-            spriteTransform.localScale = new Vector3(1, 1, 1);
-            
-        }
-        else
-        {
-            spriteTransform.localScale = new Vector3(-1, 1, 1);
-        }
-
-        if (player.IsGrounded)
-        {
-            if (player.IsMoving)
+            if (player.IsFacingRight)
             {
-                spriteAnimator.Play("Run");
+                spriteTransform.localScale = new Vector3(1, 1, 1);
+
             }
             else
             {
-                spriteAnimator.Play("Idle");
+                spriteTransform.localScale = new Vector3(-1, 1, 1);
+            }
+
+            if (player.IsGrounded)
+            {
+
+                if (player.IsMoving)
+                {
+                    spriteAnimator.Play("Run");
+                }
+                else
+                {
+                    spriteAnimator.Play("Idle");
+                }
+            }
+            else
+            {
+                spriteAnimator.Play("Jump");
             }
         }
-        else
+        
+    }
+
+    private void DigAnimationFinished()
+    {
+        print("Dig animation was finished");
+        isPlayingSingleAnimation = false;
+        if(OnDigEnded != null)
         {
-            spriteAnimator.Play("Jump");
+            OnDigEnded();
         }
     }
 
-
+    private void StartDigging()
+    {
+        print("Digging Started");
+        isPlayingSingleAnimation = true;
+        spriteAnimator.Play("Dig");
+    }
 }

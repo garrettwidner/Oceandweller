@@ -27,6 +27,11 @@ public class Player : MonoBehaviour
     private Vector3 velocity;
     private float velocityXSmoothing;
 
+    //Dig
+    private bool canMove = true;
+    public PlayerDigger digger;
+    public PlayerAnimationHandler animationHandler;
+
     //Used to smooth errors where the character shows as not grounded for only a single frame
     private bool wasGroundedLastFrame;
 
@@ -71,6 +76,18 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        digger.OnDigStarted += Immobilize;
+        animationHandler.OnDigEnded += Mobilize;
+    }
+
+    private void OnDisable()
+    {
+        digger.OnDigStarted -= Immobilize;
+        animationHandler.OnDigEnded -= Mobilize;
+    }
+
     private void Start()
     {
         controller = GetComponent<Controller2D>();
@@ -82,8 +99,6 @@ public class Player : MonoBehaviour
         //print("Gravity: " + gravity + " Jump Velocity: " + maxJumpVelocity);
 
         playerActions = PlayerActions.CreateWithDefaultBindings();
-
-        
     }
 
     private void Update()
@@ -91,6 +106,11 @@ public class Player : MonoBehaviour
         //Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         Vector2 input = new Vector2(playerActions.Move.X, playerActions.Move.Y);
         input = input.ClosestCardinalDirection();
+
+        if(!canMove)
+        {
+            input = Vector2.zero;
+        }
 
         int wallDirX = (controller.collisions.left) ? -1 : 1;
 
@@ -174,6 +194,14 @@ public class Player : MonoBehaviour
         wasGroundedLastFrame = controller.collisions.below;
     }
 
+    private void Immobilize()
+    {
+        canMove = false;
+    }
 
+    private void Mobilize()
+    {
+        canMove = true;
+    }
 
 }
