@@ -52,6 +52,7 @@ public class PlayerAnimationHandler : MonoBehaviour
             }
             else
             {
+                print("Being told to fucking jump");
                 spriteAnimator.Play("Jump");
             }
         }

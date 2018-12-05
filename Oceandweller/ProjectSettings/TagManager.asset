@@ -18,7 +18,7 @@ TagManager:
   - Terrain
   - Soil
   - Shade
-  - 
+  - Heat
   - 
   - 
   - 
@@ -50,6 +50,9 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 4245599375
+    locked: 0
+  - name: Over Player
+    uniqueID: 420125347
     locked: 0
   - name: Soil
     uniqueID: 2441937705

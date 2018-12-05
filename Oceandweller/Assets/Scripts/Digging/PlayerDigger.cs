@@ -7,17 +7,25 @@ public class PlayerDigger : MonoBehaviour
     public LayerMask soilLayer;
     public Transform digLocation;
     public int digStrength = 1;
+    public float digTimeAfterAnimationStart = 0.1f;
 
     public delegate void DigAction();
     public DigAction OnDigStarted;
 
     public void Dig(Soil soil)
     {
-        soil.Dig(digStrength);
+        StartCoroutine(DigPhysicalHole(soil));
+
         if(OnDigStarted != null)
         {
             OnDigStarted();
         }
+    }
+
+    public IEnumerator DigPhysicalHole(Soil soil)
+    {
+        yield return new WaitForSeconds(digTimeAfterAnimationStart);
+        soil.Dig(digStrength);
     }
 
     public void ChangeWetness(Soil soil)
