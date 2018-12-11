@@ -25,9 +25,12 @@ public class Controller2D : RaycastController
 
     public void Move(Vector3 velocity, Vector2 input, bool standingOnPlatform = false)
     {
+        bool lastFrameGrounded = collisions.below;
+
         collisions.Reset();
         UpdateRaycastOrigins();
 
+        collisions.groundedLastFrame = lastFrameGrounded;
         collisions.velocityOld = velocity;
         playerInput = input;
 
@@ -307,6 +310,7 @@ public class Controller2D : RaycastController
 
         public bool climbingSlope;
         public bool descendingSlope;
+        public bool groundedLastFrame;
         public float slopeAngle, slopeAngleOld;
         public Vector3 velocityOld;
         public int faceDir;
@@ -316,6 +320,7 @@ public class Controller2D : RaycastController
         {
             climbingSlope = false;
             descendingSlope = false;
+            groundedLastFrame = false;
             above = below = false;
             left = right = false;
             slopeAngleOld = slopeAngle;

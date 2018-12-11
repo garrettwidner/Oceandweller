@@ -32,9 +32,6 @@ public class Player : MonoBehaviour
     public PlayerDigger digger;
     public PlayerAnimationHandler animationHandler;
 
-    //Used to smooth errors where the character shows as not grounded for only a single frame
-    private bool wasGroundedLastFrame;
-
     Controller2D controller;
     private PlayerActions playerActions;
 
@@ -68,7 +65,7 @@ public class Player : MonoBehaviour
     {
         get
         {
-            if(controller.collisions.below || !wasGroundedLastFrame)
+            if(controller.collisions.below || (!controller.collisions.below && controller.collisions.groundedLastFrame))
             {
                 return true;
             }
@@ -190,8 +187,6 @@ public class Player : MonoBehaviour
         {
             velocity.y = 0;
         }
-
-        wasGroundedLastFrame = controller.collisions.below;
     }
 
     private void Immobilize()
