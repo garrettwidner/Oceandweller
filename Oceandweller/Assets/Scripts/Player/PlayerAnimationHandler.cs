@@ -8,8 +8,10 @@ public class PlayerAnimationHandler : MonoBehaviour
     public Player player;
     public Transform spriteTransform;
     public PlayerDigger digger;
+    public Transform attackTransform;
 
-    private bool isPlayingSingleAnimation = false;
+    private bool isPlayingSingleGroundedAnimation = false;
+    private bool isPlayingSingleAirborneAnimation = false;
 
     public delegate void AnimationAction();
     public AnimationAction OnDigEnded;
@@ -26,17 +28,20 @@ public class PlayerAnimationHandler : MonoBehaviour
 
     private void Update()
     {
-        if(!isPlayingSingleAnimation)
+        if(!isPlayingSingleGroundedAnimation)
         {
-            if (player.IsFacingRight)
+            if(isPlayingSingleAirborneAnimation)
             {
-                spriteTransform.localScale = new Vector3(1, 1, 1);
+                HandleSpriteTurning();
+                if(player.IsGrounded)
+                {
+                    AirborneAnimationFinished();
+                }
+                return;
+            }
 
-            }
-            else
-            {
-                spriteTransform.localScale = new Vector3(-1, 1, 1);
-            }
+
+            HandleSpriteTurning();
 
             if (player.IsGrounded)
             {
@@ -52,27 +57,53 @@ public class PlayerAnimationHandler : MonoBehaviour
             }
             else
             {
-                print("Being told to fucking jump");
                 spriteAnimator.Play("Jump");
             }
         }
         
     }
 
+    private void HandleSpriteTurning()
+    {
+        if (player.IsFacingRight)
+        {
+            spriteTransform.localScale = new Vector3(1, 1, 1);
+            attackTransform.localScale = new Vector3(1, 1, 1);
+        }
+        else
+        {
+            spriteTransform.localScale = new Vector3(-1, 1, 1);
+            attackTransform.localScale = new Vector3(-1, 1, 1);
+        }
+    }
+
+    private void StartSlash()
+    {
+
+    }
+
+    private void AirborneAnimationFinished()
+    {
+        isPlayingSingleAirborneAnimation = false;
+
+    }
+
+    private void StartDigging()
+    {
+        //print("Digging Started");
+        isPlayingSingleGroundedAnimation = true;
+        spriteAnimator.Play("Dig");
+    }
+
     private void DigAnimationFinished()
     {
-        print("Dig animation was finished");
-        isPlayingSingleAnimation = false;
+        //print("Dig animation was finished");
+        isPlayingSingleGroundedAnimation = false;
         if(OnDigEnded != null)
         {
             OnDigEnded();
         }
     }
 
-    private void StartDigging()
-    {
-        print("Digging Started");
-        isPlayingSingleAnimation = true;
-        spriteAnimator.Play("Dig");
-    }
+    
 }
