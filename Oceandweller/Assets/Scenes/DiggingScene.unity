@@ -357,17 +357,16 @@ MonoBehaviour:
     - frame: 3
       name: DigAnimationFinished
   - name: JumpSlash
-    fps: 10
+    fps: 20
     frames:
-    - {fileID: 21300000, guid: 7b1ace9fe92fdac47a10c3fb7b1cf7d1, type: 3}
     - {fileID: 21300002, guid: 7b1ace9fe92fdac47a10c3fb7b1cf7d1, type: 3}
     - {fileID: 21300004, guid: 7b1ace9fe92fdac47a10c3fb7b1cf7d1, type: 3}
     - {fileID: 21300006, guid: 7b1ace9fe92fdac47a10c3fb7b1cf7d1, type: 3}
     - {fileID: 21300008, guid: 7b1ace9fe92fdac47a10c3fb7b1cf7d1, type: 3}
     - {fileID: 21300010, guid: 7b1ace9fe92fdac47a10c3fb7b1cf7d1, type: 3}
     triggers:
-    - frame: 3
-      name: DigAnimationFinished
+    - frame: 4
+      name: EndSlashAnimation
   playAnimationOnStart: 
 --- !u!114 &265598630
 MonoBehaviour:
@@ -385,6 +384,7 @@ MonoBehaviour:
   spriteTransform: {fileID: 265598627}
   digger: {fileID: 1201530938}
   attackTransform: {fileID: 1854233601}
+  attacker: {fileID: 1854233602}
 --- !u!1 &286287423
 GameObject:
   m_ObjectHideFlags: 0
@@ -5698,6 +5698,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1854233601}
   - component: {fileID: 1854233603}
+  - component: {fileID: 1854233602}
   m_Layer: 13
   m_Name: Attacker
   m_TagString: Untagged
@@ -5718,6 +5719,19 @@ Transform:
   m_Father: {fileID: 672307661}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1854233602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1854233600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0960f5b6b75abb145ac2c8c77820f5cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageDone: 50
+  attackCollider: {fileID: 1854233603}
 --- !u!61 &1854233603
 BoxCollider2D:
   m_ObjectHideFlags: 0

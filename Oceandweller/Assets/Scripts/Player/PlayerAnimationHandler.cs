@@ -9,9 +9,11 @@ public class PlayerAnimationHandler : MonoBehaviour
     public Transform spriteTransform;
     public PlayerDigger digger;
     public Transform attackTransform;
+    public PlayerAttacker attacker;
 
     private bool isPlayingSingleGroundedAnimation = false;
     private bool isPlayingSingleAirborneAnimation = false;
+    private bool isPlayingAttackAnimation = false;
 
     public delegate void AnimationAction();
     public AnimationAction OnDigEnded;
@@ -19,11 +21,14 @@ public class PlayerAnimationHandler : MonoBehaviour
     private void OnEnable()
     {
         digger.OnDigStarted += StartDigging;
+        attacker.OnAttackTriggered += StartSlashAnimation;
     }
 
     private void OnDisable()
     {
         digger.OnDigStarted -= StartDigging;
+        attacker.OnAttackTriggered -= StartSlashAnimation;
+
     }
 
     private void Update()
@@ -35,7 +40,7 @@ public class PlayerAnimationHandler : MonoBehaviour
                 HandleSpriteTurning();
                 if(player.IsGrounded)
                 {
-                    AirborneAnimationFinished();
+                    //AirborneAnimationFinished();
                 }
                 return;
             }
@@ -77,15 +82,25 @@ public class PlayerAnimationHandler : MonoBehaviour
         }
     }
 
-    private void StartSlash()
+    private void StartSlashAnimation()
     {
+        isPlayingSingleAirborneAnimation = true;
+        isPlayingAttackAnimation = true;
+        spriteAnimator.Play("JumpSlash");
+        print("Should play jumping slash animation");
+    }
 
+    private void EndSlashAnimation()
+    {
+        isPlayingAttackAnimation = false;
+        AirborneAnimationFinished();
+        print("Played slash end");
     }
 
     private void AirborneAnimationFinished()
     {
         isPlayingSingleAirborneAnimation = false;
-
+        
     }
 
     private void StartDigging()
@@ -104,6 +119,5 @@ public class PlayerAnimationHandler : MonoBehaviour
             OnDigEnded();
         }
     }
-
     
 }
