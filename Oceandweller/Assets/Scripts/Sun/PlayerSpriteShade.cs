@@ -27,11 +27,11 @@ public class PlayerSpriteShade : MonoBehaviour
     {
         if(isShaded)
         {
-            playerSpriteRenderer.color = shadedPlayerColor;
+            playerSpriteRenderer.color = new Color(shadedPlayerColor.r, shadedPlayerColor.g, shadedPlayerColor.b, playerSpriteRenderer.color.a);
         }
         else
         {
-            playerSpriteRenderer.color = normalPlayerColor;
+            playerSpriteRenderer.color = new Color(normalPlayerColor.r, normalPlayerColor.g, normalPlayerColor.b, playerSpriteRenderer.color.a);
         }
     }
 
@@ -39,11 +39,11 @@ public class PlayerSpriteShade : MonoBehaviour
     {
         if(isHeated)
         {
-            playerSpriteRenderer.color = heatedPlayerColor;
+            playerSpriteRenderer.color = new Color(heatedPlayerColor.r, heatedPlayerColor.g, heatedPlayerColor.b, playerSpriteRenderer.color.a);
         }
         else
         {
-            playerSpriteRenderer.color = normalPlayerColor;
+            playerSpriteRenderer.color = new Color(normalPlayerColor.r, normalPlayerColor.g, normalPlayerColor.b, playerSpriteRenderer.color.a);
         }
     }
 

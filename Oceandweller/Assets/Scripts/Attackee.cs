@@ -10,6 +10,10 @@ public class Attackee : MonoBehaviour
     public float coolDownTime = 2f;
     protected bool isCoolingDown = false;
 
+    public delegate void CooldownAction();
+    public event CooldownAction OnCooldownStarted;
+    public event CooldownAction OnCooldownEnded;
+
     private void Update()
     {
         if(isCoolingDown)
@@ -32,17 +36,27 @@ public class Attackee : MonoBehaviour
     {
         float damage = -attacker.GetDamage();
         statusLevel.StartImmediateIncrement(damage);
-        print(gameObject.name + " was damaged for " + damage + " damage.");
+        print(gameObject.transform.parent.name + " was damaged for " + damage + " damage.");
 
         isCoolingDown = true;
         CancelInvoke("EndCooldown");
         Invoke("EndCooldown", coolDownTime);
+
+        if(OnCooldownStarted != null)
+        {
+            OnCooldownStarted();
+        }
     }
 
     protected void EndCooldown()
     {
         isCoolingDown = false;
         print("Cooldown ended");
+
+        if(OnCooldownEnded != null)
+        {
+            OnCooldownEnded();
+        }
     }
 
 }

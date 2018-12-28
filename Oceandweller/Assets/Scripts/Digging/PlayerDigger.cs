@@ -12,6 +12,13 @@ public class PlayerDigger : MonoBehaviour
     public delegate void DigAction();
     public DigAction OnDigStarted;
 
+    private PlayerActions playerActions;
+
+    private void Start()
+    {
+        playerActions = PlayerActions.CreateWithDefaultBindings();
+    }
+
     public void Dig(Soil soil)
     {
         StartCoroutine(DigPhysicalHole(soil));
@@ -35,14 +42,15 @@ public class PlayerDigger : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.J))
+        if(playerActions.Down.IsPressed && playerActions.Attack.WasPressed)
         {
             Collider2D collider = Physics2D.OverlapPoint(digLocation.position, soilLayer);
-            if(collider != null)
+            if (collider != null)
             {
                 Dig(collider.GetComponent<Soil>());
             }
         }
+
         else if(Input.GetKeyDown(KeyCode.U))
         {
             Collider2D collider = Physics2D.OverlapPoint(digLocation.position, soilLayer);

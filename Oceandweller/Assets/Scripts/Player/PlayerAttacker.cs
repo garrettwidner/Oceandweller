@@ -13,21 +13,29 @@ public class PlayerAttacker : Attacker
     private void Start()
     {
         playerActions = PlayerActions.CreateWithDefaultBindings();
+        Disengage();
     }
 
     private void Update()
     {
-        if(playerActions.Attack.WasPressed)
+        if(!playerActions.Down.IsPressed && playerActions.Attack.WasPressed)
         {
-            if(OnAttackTriggered != null)
-            {
-                OnAttackTriggered();
-            }
+            StartAttack();
         }
     }
     private void StartAttack()
     {
+        Engage();
 
+        if (OnAttackTriggered != null)
+        {
+            OnAttackTriggered();
+        }
+    }
+
+    private void EndAttack()
+    {
+        Disengage();
     }
 
 }

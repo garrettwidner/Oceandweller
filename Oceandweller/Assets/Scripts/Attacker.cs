@@ -25,10 +25,12 @@ public class Attacker : MonoBehaviour
     public void Engage()
     {
         isEngaged = true;
+        attackCollider.enabled = true;
     }
 
     public void Disengage()
     {
         isEngaged = false;
+        attackCollider.enabled = false;
     }
 }
