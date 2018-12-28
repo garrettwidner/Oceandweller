@@ -17,6 +17,7 @@ public class PlayerAnimationHandler : MonoBehaviour
 
     public delegate void AnimationAction();
     public AnimationAction OnDigEnded;
+    public AnimationAction OnAttackEnded;
 
     private void OnEnable()
     {
@@ -95,6 +96,11 @@ public class PlayerAnimationHandler : MonoBehaviour
         isPlayingAttackAnimation = false;
         AirborneAnimationFinished();
         print("Played slash end");
+
+        if(OnAttackEnded != null)
+        {
+            OnAttackEnded();
+        }
     }
 
     private void AirborneAnimationFinished()

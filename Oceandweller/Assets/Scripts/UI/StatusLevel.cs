@@ -20,6 +20,10 @@ public class StatusLevel : MonoBehaviour
     [SerializeField] protected UnityEvent OnLevelDepleted;
     [SerializeField] protected UnityEvent OnLevelMaxed;
 
+    public delegate void StatusLevelEvent();
+    public StatusLevelEvent OnLevelHitZero;
+    public StatusLevelEvent OnLevelHitFull;
+
     private float minimumAllowedError = 0.01f;
 
     public float StatLevel
@@ -232,6 +236,10 @@ public class StatusLevel : MonoBehaviour
             {
                 OnLevelDepleted.Invoke();
             }
+            if(OnLevelHitZero != null)
+            {
+                OnLevelHitZero();
+            }
 
             ResetIncrements(false);
         }
@@ -243,6 +251,10 @@ public class StatusLevel : MonoBehaviour
             if(OnLevelMaxed != null)
             {
                 OnLevelMaxed.Invoke();
+            }
+            if(OnLevelHitFull != null)
+            {
+                OnLevelHitFull();
             }
 
             ResetIncrements(true);

@@ -6,9 +6,22 @@ public class PlayerAttacker : Attacker
 {
     //Tells animator when to attack, sets whether it is engaged based on animation in real time
     private PlayerActions playerActions;
+    public PlayerAnimationHandler animationHandler;
 
     public delegate void AttackAction();
     public AttackAction OnAttackTriggered;
+
+    private void OnEnable()
+    {
+        animationHandler.OnAttackEnded += EndAttack;
+        
+    }
+
+    private void OnDisable()
+    {
+        animationHandler.OnAttackEnded -= EndAttack;
+
+    }
 
     private void Start()
     {
